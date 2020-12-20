@@ -20,8 +20,7 @@ body {
 }
 
 .container__color {
-    display: flex;
-    justify-content: center;
+
 }
 
 .container__color-circle {
@@ -29,4 +28,26 @@ body {
     width: 400px;
     border-radius: 100%;
     box-shadow: 0 0 20px 4px hsl(210, 20%, 90%);
+    margin: auto auto;
+}
+
+.container__color-form {
+    width: 400px;
+    margin: 20px auto;
+}
+
+.container__color-form__form {
+    padding: 20px;
+    width: 100%;
+}
+
+.container__color-form__form__color {
+    padding: 10px;
+    width: 100%;
+    border: 2px solid hsl(210, 10%, 90%);
+}
+
+.container__color-form__form__error {
+    margin: 10px 0;
+    color: hsl(0, 50%, 50%);
 }
