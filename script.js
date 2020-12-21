@@ -3,15 +3,21 @@ let app = (function () {
     const _colorInput = document.querySelector('.container__color-form__form__color');
     const _colorForm = document.querySelector('.container__color-form__form');
     const _colorError = document.querySelector('.container__color-form__form__error');
+    const _intervalForm = document.querySelector('.container__interval-form__form');
+    const _incrementInput = document.querySelector('.container__interval-form__form__increment');
+    const _intervalInput = document.querySelector('.container__interval-form__form__interval');
+    const _intervalFormError = document.querySelector('.container__interval-form__form__error');
 
     const _allowChars = ['#', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
     const _colorErrorMessage = "Color must be in hexadecimal format, contains 7 characters and starts with a #";
+    const _intervalErrorMessage = "Increment/Cycle and Millisecond/Cycle must be an integer and larger than 0";
     const _regex = /#/g;
 
     let _color = '';
     let _colorHex = '';
     let _colorCycleInterval = null;
     let _increment = 100;
+    let _interval = 250;
 
     _colorForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -26,6 +32,23 @@ let app = (function () {
             startColorCycle();
         } else {
             displayColorErrorMessage();
+        }
+    })
+
+    _intervalForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if ( 
+            checkValidIncrementInput(_incrementInput.value) && 
+            checkValidIntervalInput(_intervalInput.value)
+        ) {
+            _increment = parseInt(_incrementInput.value, 10);
+            _interval = parseInt(_intervalInput.value, 10);
+            renderColorCircleColor(_color);
+            getColorHex();
+            startColorCycle();
+        } else {
+            displayIntervalErrorMessage();
         }
     })
 
@@ -94,7 +117,19 @@ let app = (function () {
         _colorCycleInterval = setInterval(() => {
             incrementColor();
             _colorCircle.style.backgroundColor = `#${_colorHex}`;
-        }, 250);
+        }, _interval);
+    }
+
+    function checkValidIncrementInput(increment) {
+        return isNaN(parseInt(increment, 10)) ? false : true
+    }
+
+    function checkValidIntervalInput(interval) {
+        return isNaN(parseInt(interval, 10)) ? false : true
+    }
+
+    function displayIntervalErrorMessage() {
+        _intervalFormError = _intervalErrorMessage;   
     }
 
 })();
