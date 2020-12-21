@@ -7,6 +7,8 @@ let app = (function () {
     const _incrementInput = document.querySelector('.container__interval-form__form__increment');
     const _intervalInput = document.querySelector('.container__interval-form__form__interval');
     const _intervalFormError = document.querySelector('.container__interval-form__form__error');
+    const _overlay = document.querySelector('.container__overlay');
+    const _overlayButton = document.querySelector('.container__overlay__button');
 
     const _allowChars = ['#', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
     const _colorErrorMessage = "Color must be in hexadecimal format, contains 7 characters and starts with a #";
@@ -19,6 +21,11 @@ let app = (function () {
     let _increment = 100;
     let _interval = 250;
 
+    _overlayButton.addEventListener('click', (event) => {
+        clearInterval(_colorCycleInterval);
+        hideOverlay();
+    })
+
     _colorForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -30,6 +37,7 @@ let app = (function () {
             renderColorCircleColor(color);
             getColorHex();
             startColorCycle();
+            showOverlay();
         } else {
             displayColorErrorMessage();
         }
@@ -47,6 +55,7 @@ let app = (function () {
             renderColorCircleColor(_color);
             getColorHex();
             startColorCycle();
+            showOverlay();
         } else {
             displayIntervalErrorMessage();
         }
@@ -129,7 +138,16 @@ let app = (function () {
     }
 
     function displayIntervalErrorMessage() {
-        _intervalFormError = _intervalErrorMessage;   
+        _intervalFormError.textContent = _intervalErrorMessage;   
     }
+
+    function showOverlay() {
+        _overlay.classList.remove('hidden');
+    }
+
+    function hideOverlay() {
+        _overlay.classList.add('hidden');
+    }
+
 
 })();
