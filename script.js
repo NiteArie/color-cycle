@@ -8,14 +8,22 @@ let app = (function () {
     const _colorErrorMessage = "Color must be in hexadecimal format, contains 7 characters and starts with a #";
     const _regex = /#/g;
 
+    let _color = '';
+    let _colorHex = '';
+    let _colorCycleInterval = null;
+    let _increment = 100;
 
     _colorForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
         let color = _colorInput.value;
+        _color = color;
+
         if ( checkValidColorInput(color) ) {
             clearColorErrorMessage();
             renderColorCircleColor(color);
+            getColorHex();
+            startColorCycle();
         } else {
             displayColorErrorMessage();
         }
@@ -49,7 +57,7 @@ let app = (function () {
     }
 
     function checkColorInputCharPosition(color) {
-        return color.match(_regex).length === 1;
+        return color.match(_regex).length === 1 && color[0] === "#";
     }
 
     function displayColorErrorMessage() {
@@ -58,6 +66,35 @@ let app = (function () {
 
     function clearColorErrorMessage() {
         _colorError.textContent = '';
+    }
+
+    function getColorHex() {
+        _colorHex = _color.slice(1, _color.length);
+    }
+
+    function randomHexColor() {
+        return Math.floor(Math.random() * parseInt("ffffff", 16));
+    }
+
+    function incrementColor() {
+        let colorHexValue = parseInt(_colorHex, 16);
+        let temp = colorHexValue + _increment;
+        if ( temp < 16777215 ) {
+            _colorHex = temp.toString(16);
+            _color = `#${_colorHex}`;
+        } else {
+            _colorHex = '000000';
+            _color = '#000000';
+        }
+        console.log(_color);
+    }
+
+
+    function startColorCycle() {
+        _colorCycleInterval = setInterval(() => {
+            incrementColor();
+            _colorCircle.style.backgroundColor = `#${_colorHex}`;
+        }, 250);
     }
 
 })();
