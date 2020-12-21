@@ -23,6 +23,7 @@ let app = (function () {
 
     _overlayButton.addEventListener('click', (event) => {
         clearInterval(_colorCycleInterval);
+        enableInputs();
         hideOverlay();
     })
 
@@ -35,6 +36,7 @@ let app = (function () {
         if ( checkValidColorInput(color) ) {
             clearColorErrorMessage();
             renderColorCircleColor(color);
+            disableInputs();
             getColorHex();
             startColorCycle();
             showOverlay();
@@ -53,6 +55,7 @@ let app = (function () {
             _increment = parseInt(_incrementInput.value, 10);
             _interval = parseInt(_intervalInput.value, 10);
             renderColorCircleColor(_color);
+            disableInputs();
             getColorHex();
             startColorCycle();
             showOverlay();
@@ -149,5 +152,16 @@ let app = (function () {
         _overlay.classList.add('hidden');
     }
 
+    function disableInputs() {
+        _colorInput.disabled = true;
+        _incrementInput.disabled = true;
+        _intervalInput.disabled = true;
+    }
+
+    function enableInputs() {
+        _colorInput.disabled = false;
+        _incrementInput.disabled = false;
+        _intervalInput.disabled = false;
+    }
 
 })();
