@@ -17,14 +17,36 @@
         <div class="container__color">
             <div class="container__color-circle">
             </div>
-            <div class="container__color-form">
+            <div class="container__color-form__outer">
                 <div class="container__color-form">
                     <form class="container__color-form__form">
-                        <p class="container__color-form__form__error"></p>
+                        <label class="container__color-form__form__label">Starting Color:</label>
                         <input 
-                            class="container__color-form__form__color"
-                            type="text" placeholder="Hexadecimal 6 digits (Ex: #1f2f3f)" name="color">
+                        class="container__color-form__form__color"
+                        type="text" placeholder="Hexadecimal color value (Ex: #1f2f3f)" name="color">
                         
+                        <p class="container__color-form__form__error"></p>
+                        <input type="submit" value="Submit" hidden> 
+                    </form>
+                </div>
+                <div class="container__interval-form">
+                    <form class="container__interval-form__form">
+                        <div>
+                            <label class="container__interval-form__form__label">Increment/Cycle:</label>
+                            <input 
+                            class="container__interval-form__form__increment"
+                            value="100"
+                            type="text" placeholder="Integer value incremented per cycle" name="color">
+                        </div>
+                        <div>
+                            <label class="container__interval-form__form__label">Second/Cycle</label>
+                            <input 
+                            class="container__interval-form__form__interval"
+                            value="250"
+                            type="text" placeholder="How many millisecond per cycle" name="color">
+                        </div>
+
+                        <p class="container__interval-form__form__error"></p>
                         <input type="submit" value="Submit" hidden> 
                     </form>
                 </div>

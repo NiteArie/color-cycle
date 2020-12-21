@@ -31,22 +31,53 @@ body {
     margin: auto auto;
 }
 
-.container__color-form {
-    width: 400px;
+.container__color-form__outer {
+    max-width: 900px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 0px hsl(210, 20%, 90%);
     margin: 20px auto;
 }
 
+.container__interval-form,
+.container__color-form {
+    padding: 20px;
+    border-bottom: 2px solid hsl(210, 10%, 90%);
+}
+
+.container__interval-form {
+    border-bottom: none;
+}
+
+.container__interval-form__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+}
+
+.container__interval-form__form,
 .container__color-form__form {
     padding: 20px;
     width: 100%;
 }
 
+.container__interval-form__form__label,
+.container__color-form__form__label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: hsl(210, 10%, 50%);
+}
+
+.container__interval-form__form__increment,
+.container__interval-form__form__interval,
 .container__color-form__form__color {
     padding: 10px;
     width: 100%;
+    margin-bottom: 10px;
     border: 2px solid hsl(210, 10%, 90%);
 }
 
+.container__interval-form__form__error,
 .container__color-form__form__error {
     margin: 10px 0;
     color: hsl(0, 50%, 50%);
